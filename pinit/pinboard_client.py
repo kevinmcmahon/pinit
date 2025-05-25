@@ -71,4 +71,3 @@ def add_bookmark_from_json(
         description=data.get("description", ""),
         tags=data.get("tags", []),
     )
-

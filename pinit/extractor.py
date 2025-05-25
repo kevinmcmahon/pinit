@@ -51,4 +51,3 @@ First fetch the web page content, then extract the bookmark data as JSON. DO NOT
             raise ValueError(
                 f"Failed to parse JSON response: {e}\nResponse was: {response.text()}"
             ) from e
-

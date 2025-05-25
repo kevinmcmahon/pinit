@@ -58,7 +58,9 @@ def cli() -> None:
 @click.option("--json", "output_json", is_flag=True, help="Output raw JSON")
 @click.option("--private", is_flag=True, help="Make bookmark private")
 @click.option("--toread", is_flag=True, help="Mark as 'to read'")
-def add(url: str, dry_run: bool, output_json: bool, private: bool, toread: bool) -> None:
+def add(
+    url: str, dry_run: bool, output_json: bool, private: bool, toread: bool
+) -> None:
     """Add a URL to Pinboard with AI-extracted metadata."""
     try:
         # Extract bookmark data
@@ -147,4 +149,3 @@ def config() -> None:
 def main() -> None:
     """Entry point for the CLI."""
     cli()
-
