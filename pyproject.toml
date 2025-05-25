@@ -16,3 +16,53 @@ dependencies = [
 
 [project.scripts]
 pinit = "pinit.cli:main"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.11.11",
+    "types-click>=7.1.8",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "ARG", # flake8-unused-arguments
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports in __init__ files are OK
+
+[tool.ruff.lint.isort]
+known-first-party = ["pinit"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+no_implicit_reexport = true
+
+# Per-module options
+[[tool.mypy.overrides]]
+module = [
+    "llm",
+    "llm.*",
+    "pinboard",
+    "pinboard.*",
+]
+ignore_missing_imports = true

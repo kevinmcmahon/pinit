@@ -2,7 +2,7 @@
 # ABOUTME: Uses Claude Sonnet 4.0 to analyze pages and extract metadata
 
 import json
-from typing import Dict
+from typing import Any
 
 import llm
 from jinja2 import Template
@@ -10,8 +10,8 @@ from jinja2 import Template
 
 class PinboardBookmarkExtractor:
     """Extracts bookmark metadata from web pages using Claude Sonnet."""
-    
-    def __init__(self):
+
+    def __init__(self) -> None:
         self.model = llm.get_model("anthropic/claude-sonnet-4-0")
 
         self.system_prompt = """You are a bookmark extraction assistant. Fetch the web page content and extract bookmark data.
@@ -28,7 +28,7 @@ URL: {{ url }}
 First fetch the web page content, then extract the bookmark data as JSON. DO NOT include a code fence."""
         )
 
-    def extract_bookmark(self, url: str) -> Dict[str, any]:
+    def extract_bookmark(self, url: str) -> dict[str, Any]:
         """
         Extract bookmark data from a URL.
 
@@ -45,9 +45,10 @@ First fetch the web page content, then extract the bookmark data as JSON. DO NOT
         response = self.model.prompt(prompt, system=self.system_prompt)
 
         try:
-            bookmark_data = json.loads(response.text().strip())
+            bookmark_data: dict[str, Any] = json.loads(response.text().strip())
             return bookmark_data
         except json.JSONDecodeError as e:
             raise ValueError(
                 f"Failed to parse JSON response: {e}\nResponse was: {response.text()}"
-            )
+            ) from e
+

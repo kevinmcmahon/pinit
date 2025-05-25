@@ -2,7 +2,7 @@
 # ABOUTME: Handles bookmark creation and API communication
 
 import json
-from typing import Dict, List, Optional, Union
+from typing import Any
 
 import pinboard
 
@@ -11,8 +11,8 @@ def add_bookmark(
     pb: pinboard.Pinboard,
     url: str,
     title: str,
-    description: Optional[str] = "",
-    tags: Optional[List[str]] = None,
+    description: str | None = "",
+    tags: list[str] | None = None,
     shared: bool = True,
     toread: bool = False,
 ) -> bool:
@@ -43,11 +43,11 @@ def add_bookmark(
         toread=toread,
     )
 
-    return result
+    return bool(result)
 
 
 def add_bookmark_from_json(
-    pb: pinboard.Pinboard, bookmark_data: Union[str, Dict]
+    pb: pinboard.Pinboard, bookmark_data: str | dict[str, Any]
 ) -> bool:
     """
     Add a bookmark to Pinboard from JSON data.
@@ -71,3 +71,4 @@ def add_bookmark_from_json(
         description=data.get("description", ""),
         tags=data.get("tags", []),
     )
+
