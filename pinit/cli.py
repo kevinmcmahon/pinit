@@ -58,14 +58,28 @@ def cli() -> None:
 @click.option("--json", "output_json", is_flag=True, help="Output raw JSON")
 @click.option("--private", is_flag=True, help="Make bookmark private")
 @click.option("--toread", is_flag=True, help="Mark as 'to read'")
+@click.option(
+    "--model",
+    default=None,
+    help="LLM model to use (default: claude-sonnet-4-0)",
+    envvar="PINIT_MODEL",
+)
 def add(
-    url: str, dry_run: bool, output_json: bool, private: bool, toread: bool
+    url: str,
+    dry_run: bool,
+    output_json: bool,
+    private: bool,
+    toread: bool,
+    model: str | None,
 ) -> None:
     """Add a URL to Pinboard with AI-extracted metadata."""
     try:
+        # Use model from option/env or default
+        model_name = model or "claude-sonnet-4-0"
+        
         # Extract bookmark data
-        with console.status("[yellow]Analyzing webpage...[/yellow]"):
-            extractor = PinboardBookmarkExtractor()
+        with console.status(f"[yellow]Analyzing webpage with {model_name}...[/yellow]"):
+            extractor = PinboardBookmarkExtractor(model_name=model_name)
             bookmark = extractor.extract_bookmark(url)
 
         if output_json:
@@ -131,6 +145,14 @@ def config() -> None:
         console.print(f"[green]✓[/green] API Token configured for user: {username}")
     else:
         console.print("[red]✗[/red] API Token not configured")
+
+    # Show model configuration
+    model = os.getenv("PINIT_MODEL", "claude-sonnet-4-0")
+    console.print(f"\n[bold]Model:[/bold] {model}")
+    if os.getenv("PINIT_MODEL"):
+        console.print("  [dim](set via PINIT_MODEL environment variable)[/dim]")
+    else:
+        console.print("  [dim](using default)[/dim]")
 
     # Check for config files
     local_env = Path(".env")

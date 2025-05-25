@@ -11,8 +11,8 @@ from jinja2 import Template
 class PinboardBookmarkExtractor:
     """Extracts bookmark metadata from web pages using Claude Sonnet."""
 
-    def __init__(self) -> None:
-        self.model = llm.get_model("anthropic/claude-sonnet-4-0")
+    def __init__(self, model_name: str = "claude-sonnet-4-0") -> None:
+        self.model = llm.get_model(model_name)
 
         self.system_prompt = """You are a bookmark extraction assistant. Fetch the web page content and extract bookmark data.
 Extract these four fields:
