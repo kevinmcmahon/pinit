@@ -35,6 +35,21 @@ Optionally set the AI model:
 PINIT_MODEL=claude-opus-4-0  # defaults to claude-sonnet-4-0
 ```
 
+### LLM Library API Keys
+
+This application uses the [LLM library](https://llm.datasette.io/) to interact with AI models. You'll need to set the appropriate API key environment variable for the model provider you're using:
+
+- **For Anthropic Claude models** (default): Set `ANTHROPIC_API_KEY`
+- **For OpenAI models**: Set `OPENAI_API_KEY`
+- **For other providers**: See the [LLM documentation](https://llm.datasette.io/en/stable/setup.html) for required environment variables
+
+Example:
+
+```bash
+# Add to your .env file or export directly
+ANTHROPIC_API_KEY=your_anthropic_api_key
+```
+
 ## Usage
 
 ```bash
