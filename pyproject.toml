@@ -1,11 +1,13 @@
 [project]
 name = "pinit"
 version = "0.1.0"
-description = "AI-powered Pinboard bookmark manager using Claude Sonnet"
+description = "AI-powered Pinboard bookmark manager using AI for tagging and summarization"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "beautifulsoup4>=4.13.4",
     "click>=8.2.1",
+    "httpx>=0.28.1",
     "jinja2>=3.1.6",
     "llm>=0.25",
     "llm-anthropic>=0.16",
@@ -18,11 +20,7 @@ dependencies = [
 pinit = "pinit.cli:main"
 
 [dependency-groups]
-dev = [
-    "mypy>=1.15.0",
-    "ruff>=0.11.11",
-    "types-click>=7.1.8",
-]
+dev = ["mypy>=1.15.0", "ruff>=0.11.11", "types-click>=7.1.8"]
 
 [tool.ruff]
 target-version = "py311"
@@ -41,11 +39,11 @@ select = [
     "SIM", # flake8-simplify
 ]
 ignore = [
-    "E501",  # line too long (handled by formatter)
+    "E501", # line too long (handled by formatter)
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]  # unused imports in __init__ files are OK
+"__init__.py" = ["F401"] # unused imports in __init__ files are OK
 
 [tool.ruff.lint.isort]
 known-first-party = ["pinit"]
@@ -59,10 +57,5 @@ no_implicit_reexport = true
 
 # Per-module options
 [[tool.mypy.overrides]]
-module = [
-    "llm",
-    "llm.*",
-    "pinboard",
-    "pinboard.*",
-]
+module = ["llm", "llm.*", "pinboard", "pinboard.*"]
 ignore_missing_imports = true

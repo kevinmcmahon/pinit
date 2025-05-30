@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 import click
+import httpx
 import pinboard
 from dotenv import load_dotenv
 from rich.console import Console
@@ -61,7 +62,7 @@ def cli() -> None:
 @click.option(
     "--model",
     default=None,
-    help="LLM model to use (default: claude-sonnet-4-0)",
+    help="LLM model to use (default: anthropic/claude-sonnet-4-0)",
     envvar="PINIT_MODEL",
 )
 def add(
@@ -75,8 +76,8 @@ def add(
     """Add a URL to Pinboard with AI-extracted metadata."""
     try:
         # Use model from option/env or default
-        model_name = model or "claude-sonnet-4-0"
-        
+        model_name = model or "anthropic/claude-sonnet-4-0"
+
         # Extract bookmark data
         with console.status(f"[yellow]Analyzing webpage with {model_name}...[/yellow]"):
             extractor = PinboardBookmarkExtractor(model_name=model_name)
@@ -125,6 +126,9 @@ def add(
             console.print("\n[red]✗ Failed to save bookmark[/red]")
             sys.exit(1)
 
+    except httpx.HTTPError as e:
+        console.print(f"[red]Error fetching webpage:[/red] {e}")
+        sys.exit(1)
     except ValueError as e:
         console.print(f"[red]Error extracting bookmark data:[/red] {e}")
         sys.exit(1)
@@ -147,7 +151,7 @@ def config() -> None:
         console.print("[red]✗[/red] API Token not configured")
 
     # Show model configuration
-    model = os.getenv("PINIT_MODEL", "claude-sonnet-4-0")
+    model = os.getenv("PINIT_MODEL", "anthropic/claude-sonnet-4-0")
     console.print(f"\n[bold]Model:[/bold] {model}")
     if os.getenv("PINIT_MODEL"):
         console.print("  [dim](set via PINIT_MODEL environment variable)[/dim]")

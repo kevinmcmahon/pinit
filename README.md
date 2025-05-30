@@ -62,7 +62,7 @@ PINBOARD_API_TOKEN=your_username:your_token
 ANTHROPIC_API_KEY=your_anthropic_api_key  # For Claude models
 # OPENAI_API_KEY=your_openai_api_key     # For GPT models
 
-# Optional: specify model (defaults to claude-sonnet-4-0)
+# Optional: specify model (defaults to anthropic/claude-sonnet-4-0)
 PINIT_MODEL=gpt-4  # or claude-opus-4-0, gpt-3.5-turbo, etc.
 ```
 
@@ -134,7 +134,7 @@ Configuration is loaded in this priority order:
 
 The application uses the [LLM library](https://llm.datasette.io/) for flexible AI model integration:
 
-- **Default model**: `claude-sonnet-4-0` (can be changed via `PINIT_MODEL`)
+- **Default model**: `anthropic/claude-sonnet-4-0` (can be changed via `PINIT_MODEL`)
 - **Supported providers**: Anthropic Claude, OpenAI GPT, Google Gemini, and many others
 - **Easy model switching**: Change models without code modifications
 - **Required API keys** depend on your chosen provider:
