@@ -2,6 +2,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/kevinmcmahon/pinit/releases)
 
 > AI-powered Pinboard bookmark manager that automatically extracts metadata from web pages
 
@@ -12,6 +13,7 @@
 - 🤖 **Automatic metadata extraction** - AI analyzes pages to extract title, description, and relevant tags
 - 🎯 **Smart tagging** - AI suggests contextually appropriate tags for better organization
 - 🔄 **Flexible AI models** - Supports Claude, GPT-4, Gemini, and other LLM providers
+- 🌐 **Reliable content fetching** - Local HTTP client with BeautifulSoup for robust page parsing (v0.2.0)
 - 💻 **Rich terminal UI** - Beautiful output with progress indicators and formatted results
 - 🧪 **Dry-run mode** - Preview extractions without saving to Pinboard
 - 📊 **JSON output** - Machine-readable format for scripting and automation
