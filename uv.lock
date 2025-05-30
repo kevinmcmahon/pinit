@@ -410,8 +410,8 @@ wheels = [
 
 [[package]]
 name = "pinit"
-version = "0.1.0"
-source = { virtual = "." }
+version = "0.2.1"
+source = { editable = "." }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "click" },

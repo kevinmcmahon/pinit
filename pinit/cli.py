@@ -49,7 +49,20 @@ def get_api_token() -> str | None:
 @click.group()
 @click.version_option()
 def cli() -> None:
-    """Pinit - AI-powered Pinboard bookmark manager."""
+    """Pinit - AI-powered Pinboard bookmark manager.
+
+    Automatically extracts metadata from web pages using AI to create
+    organized bookmarks for your Pinboard account.
+
+    Configuration:
+      Set PINBOARD_API_TOKEN environment variable or create a .env file
+      Optional: Set PINIT_MODEL to use a different AI model
+
+    Examples:
+      pinit add https://example.com
+      pinit add https://example.com --dry-run
+      pinit config
+    """
     load_config()
 
 
@@ -73,7 +86,26 @@ def add(
     toread: bool,
     model: str | None,
 ) -> None:
-    """Add a URL to Pinboard with AI-extracted metadata."""
+    """Add a URL to Pinboard with AI-extracted metadata.
+
+    The AI will analyze the webpage content and extract:
+    - Title: The main content title (not just the HTML title)
+    - Description: A 1-2 sentence summary
+    - Tags: 3-8 relevant tags for organization
+
+    Options:
+      --dry-run     Preview extraction without saving to Pinboard
+      --json        Output raw JSON instead of formatted display
+      --private     Mark bookmark as private (default: public)
+      --toread      Mark bookmark as "to read"
+      --model       Specify AI model (default: anthropic/claude-sonnet-4-0)
+
+    Examples:
+      pinit add https://example.com
+      pinit add https://example.com --dry-run
+      pinit add https://example.com --private --toread
+      pinit add https://example.com --model gpt-4 --json
+    """
     try:
         # Use model from option/env or default
         model_name = model or "anthropic/claude-sonnet-4-0"
@@ -139,7 +171,18 @@ def add(
 
 @cli.command()
 def config() -> None:
-    """Show configuration information."""
+    """Show configuration information.
+
+    Displays:
+    - Current API token status
+    - Active AI model configuration
+    - Location of configuration files
+
+    Configuration files are loaded in priority order:
+    1. Local .env file (in current directory)
+    2. User config at ~/.pinit/.env
+    3. System environment variables
+    """
     console.print("[bold]Pinit Configuration[/bold]\n")
 
     api_token = os.getenv("PINBOARD_API_TOKEN")

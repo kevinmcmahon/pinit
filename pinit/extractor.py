@@ -19,7 +19,7 @@ class PinboardBookmarkExtractor:
             timeout=30.0,
             headers={
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-            }
+            },
         )
 
         self.system_prompt = """You are a bookmark extraction assistant. Analyze the provided web page content and extract bookmark data.
@@ -59,10 +59,12 @@ Extract the bookmark data as JSON."""
         response = self.client.get(url)
         response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, "html.parser")
 
         # Extract title
-        page_title = str(soup.title.string) if soup.title and soup.title.string else "No title"
+        page_title = (
+            str(soup.title.string) if soup.title and soup.title.string else "No title"
+        )
 
         # Remove script and style elements
         for script in soup(["script", "style"]):
@@ -74,7 +76,7 @@ Extract the bookmark data as JSON."""
         # Clean up whitespace
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-        text = ' '.join(chunk for chunk in chunks if chunk)
+        text = " ".join(chunk for chunk in chunks if chunk)
 
         # Limit content length to avoid token limits
         max_chars = 10000
@@ -102,9 +104,7 @@ Extract the bookmark data as JSON."""
 
         # Create prompt with actual content
         prompt = self.prompt_template.render(
-            url=url,
-            page_title=page_title,
-            content=content
+            url=url, page_title=page_title, content=content
         )
 
         response = self.model.prompt(prompt, system=self.system_prompt)
@@ -119,5 +119,5 @@ Extract the bookmark data as JSON."""
 
     def __del__(self) -> None:
         """Clean up the HTTP client."""
-        if hasattr(self, 'client'):
+        if hasattr(self, "client"):
             self.client.close()

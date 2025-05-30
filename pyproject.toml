@@ -1,6 +1,10 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "pinit"
-version = "0.2.0"
+version = "0.2.1"
 description = "AI-powered Pinboard bookmark manager using AI for tagging and summarization"
 readme = "README.md"
 requires-python = ">=3.11"
