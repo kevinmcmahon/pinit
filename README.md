@@ -1,12 +1,12 @@
-# 📚 pinit
+# 📚 smartpin (`pinit` CLI)
 
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/kevinmcmahon/pinit/releases)
+[![Version](https://img.shields.io/badge/version-0.2.2-blue.svg)](https://github.com/kevinmcmahon/smartpin/releases)
 
 > AI-powered Pinboard bookmark manager that automatically extracts metadata from web pages
 
-**pinit** intelligently analyzes web pages and creates perfectly organized bookmarks for your Pinboard account. Just provide a URL, and AI will extract the title, generate a concise description, and suggest relevant tags - no manual data entry required! 🤖✨
+**smartpin** installs the CLI tool `pinit`, which intelligently analyzes web pages and creates perfectly organized bookmarks for your Pinboard account. Just provide a URL, and AI will extract the title, generate a concise description, and suggest relevant tags - no manual data entry required! 🤖✨
 
 ## ✨ Features
 
@@ -25,8 +25,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/kevinmcmahon/pinit.git
-cd pinit
+git clone https://github.com/kevinmcmahon/smartpin.git
+cd smartpin
 
 # Install with uv (recommended)
 uv pip install -e .
@@ -181,7 +181,7 @@ make clean     # Remove cache files
 
 ### Architecture
 
-**pinit** follows modern Python best practices with:
+**smartpin** installs the CLI tool `pinit`, which follows modern Python best practices with:
 
 - **Type hints** throughout the codebase
 - **Comprehensive error handling** with user-friendly messages
