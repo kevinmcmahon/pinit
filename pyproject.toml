@@ -8,6 +8,24 @@ version = "0.2.2"
 description = "AI-powered Pinboard bookmark manager using AI for tagging and summarization"
 readme = "README.md"
 requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Kevin McMahon", email = "kevinmcmahon@users.noreply.github.com" },
+]
+keywords = ["pinboard", "bookmarks", "ai", "tagging", "cli"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Utilities",
+]
 dependencies = [
     "beautifulsoup4>=4.13.4",
     "click>=8.2.1",
@@ -20,8 +38,16 @@ dependencies = [
     "rich>=14.0.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/kevinmcmahon/smartpin"
+Repository = "https://github.com/kevinmcmahon/smartpin"
+Issues = "https://github.com/kevinmcmahon/smartpin/issues"
+
 [project.scripts]
 pinit = "pinit.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pinit"]
 
 [dependency-groups]
 dev = ["mypy>=1.15.0", "ruff>=0.11.11", "types-click>=7.1.8"]
