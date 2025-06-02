@@ -28,9 +28,9 @@ def ensure_config_dir() -> Path:
 
 def load_config() -> None:
     """Load configuration from environment variables.
-    
+
     Loads configuration in the following priority order:
-    1. System environment variables (highest priority)  
+    1. System environment variables (highest priority)
     2. Local .env file in current directory
     3. User config at ~/.pinit/config (lowest priority)
     """
@@ -40,12 +40,12 @@ def load_config() -> None:
     user_config_file = user_config_dir / "config"
     if user_config_file.exists():
         load_dotenv(user_config_file)
-    
-    # Local .env in current directory  
+
+    # Local .env in current directory
     local_env = Path(".env")
     if local_env.exists():
         load_dotenv(local_env, override=True)
-    
+
     # System environment variables have highest priority by default
 
 
@@ -55,12 +55,16 @@ def get_api_token() -> str | None:
     if not token:
         user_config_dir = Path.home() / ".pinit"
         console.print("[red]Error:[/red] PINBOARD_API_TOKEN not found in environment")
-        console.print("\nPlease set your Pinboard API token using one of these methods:")
+        console.print(
+            "\nPlease set your Pinboard API token using one of these methods:"
+        )
         console.print("\n1. Set environment variable:")
         console.print("   export PINBOARD_API_TOKEN=your_username:your_token")
         console.print("\n2. Create a user config file at ~/.pinit/config:")
         console.print(f"   mkdir -p {user_config_dir}")
-        console.print(f"   echo 'PINBOARD_API_TOKEN=your_username:your_token' > {user_config_dir / 'config'}")
+        console.print(
+            f"   echo 'PINBOARD_API_TOKEN=your_username:your_token' > {user_config_dir / 'config'}"
+        )
         console.print("\n3. Create a local .env file in current directory:")
         console.print("   echo 'PINBOARD_API_TOKEN=your_username:your_token' > .env")
     return token
@@ -215,38 +219,45 @@ def config(init: bool) -> None:
         # Initialize configuration
         config_dir = ensure_config_dir()
         config_file = config_dir / "config"
-        
+
         console.print("[bold]Pinit Configuration Setup[/bold]\n")
-        
+
         # Check if config already exists
         if config_file.exists():
-            overwrite = click.confirm(f"Config file already exists at {config_file}. Overwrite?", default=False)
+            overwrite = click.confirm(
+                f"Config file already exists at {config_file}. Overwrite?",
+                default=False,
+            )
             if not overwrite:
                 console.print("[yellow]Configuration setup cancelled.[/yellow]")
                 return
-        
+
         # Get API token
         console.print("Please enter your Pinboard API token.")
-        console.print("[dim]You can find this at https://pinboard.in/settings/password[/dim]\n")
+        console.print(
+            "[dim]You can find this at https://pinboard.in/settings/password[/dim]\n"
+        )
         api_token = click.prompt("PINBOARD_API_TOKEN", hide_input=True)
-        
+
         # Optionally get model
         console.print("\nOptionally, specify an AI model (press Enter for default).")
         console.print("[dim]Default: anthropic/claude-sonnet-4-0[/dim]")
         model = click.prompt("PINIT_MODEL", default="", show_default=False)
-        
+
         # Write config file
         with open(config_file, "w") as f:
             f.write("# Pinit configuration\n")
             f.write(f"PINBOARD_API_TOKEN={api_token}\n")
             if model:
                 f.write(f"PINIT_MODEL={model}\n")
-        
+
         # Set restrictive permissions
         config_file.chmod(0o600)
-        
+
         console.print(f"\n[green]✓[/green] Configuration saved to {config_file}")
-        console.print("[dim]File permissions set to 600 (read/write for owner only)[/dim]")
+        console.print(
+            "[dim]File permissions set to 600 (read/write for owner only)[/dim]"
+        )
         return
     console.print("[bold]Pinit Configuration[/bold]\n")
 
@@ -274,15 +285,17 @@ def config(init: bool) -> None:
     if local_env.exists():
         console.print(f"  - Local: {local_env.absolute()} [green]✓[/green]")
     else:
-        console.print(f"  - Local: ./.env [dim](not found)[/dim]")
-    
+        console.print("  - Local: ./.env [dim](not found)[/dim]")
+
     if user_config.exists():
         console.print(f"  - User: {user_config} [green]✓[/green]")
     else:
         console.print(f"  - User: {user_config} [dim](not found)[/dim]")
 
     if not api_token:
-        console.print("\n[yellow]Tip:[/yellow] Run 'pinit config --init' to set up configuration interactively.")
+        console.print(
+            "\n[yellow]Tip:[/yellow] Run 'pinit config --init' to set up configuration interactively."
+        )
 
 
 def main() -> None:
