@@ -409,49 +409,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pinit"
-version = "0.2.1"
-source = { editable = "." }
-dependencies = [
-    { name = "beautifulsoup4" },
-    { name = "click" },
-    { name = "httpx" },
-    { name = "jinja2" },
-    { name = "llm" },
-    { name = "llm-anthropic" },
-    { name = "pinboard" },
-    { name = "python-dotenv" },
-    { name = "rich" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "mypy" },
-    { name = "ruff" },
-    { name = "types-click" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "beautifulsoup4", specifier = ">=4.13.4" },
-    { name = "click", specifier = ">=8.2.1" },
-    { name = "httpx", specifier = ">=0.28.1" },
-    { name = "jinja2", specifier = ">=3.1.6" },
-    { name = "llm", specifier = ">=0.25" },
-    { name = "llm-anthropic", specifier = ">=0.16" },
-    { name = "pinboard", specifier = ">=2.1.9" },
-    { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "rich", specifier = ">=14.0.0" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "mypy", specifier = ">=1.15.0" },
-    { name = "ruff", specifier = ">=0.11.11" },
-    { name = "types-click", specifier = ">=7.1.8" },
-]
-
-[[package]]
 name = "pip"
 version = "25.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -695,6 +652,49 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031, upload-time = "2024-12-04T17:35:28.174Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
+]
+
+[[package]]
+name = "smartpin"
+version = "0.2.2"
+source = { editable = "." }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "click" },
+    { name = "httpx" },
+    { name = "jinja2" },
+    { name = "llm" },
+    { name = "llm-anthropic" },
+    { name = "pinboard" },
+    { name = "python-dotenv" },
+    { name = "rich" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "mypy" },
+    { name = "ruff" },
+    { name = "types-click" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "beautifulsoup4", specifier = ">=4.13.4" },
+    { name = "click", specifier = ">=8.2.1" },
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "jinja2", specifier = ">=3.1.6" },
+    { name = "llm", specifier = ">=0.25" },
+    { name = "llm-anthropic", specifier = ">=0.16" },
+    { name = "pinboard", specifier = ">=2.1.9" },
+    { name = "python-dotenv", specifier = ">=1.1.0" },
+    { name = "rich", specifier = ">=14.0.0" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = ">=1.15.0" },
+    { name = "ruff", specifier = ">=0.11.11" },
+    { name = "types-click", specifier = ">=7.1.8" },
 ]
 
 [[package]]

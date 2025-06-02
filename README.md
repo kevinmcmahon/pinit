@@ -57,7 +57,7 @@ export OPENAI_API_KEY=your_key     # For GPT models
 **3. Optional: Create a `.env` file for persistent configuration:**
 
 ```bash
-# Create in project directory or ~/.pinit/.env
+# Create in project directory as .env or at ~/.pinit/config
 PINBOARD_API_TOKEN=your_username:your_token
 
 # Choose your AI provider (set the appropriate key)
@@ -124,13 +124,13 @@ pinit add https://example.com --json | jq '.tags'
 
 ## 🔧 Configuration
 
-### Environment Variables
+### Configuration Loading
 
-Configuration is loaded in this priority order:
+Configuration is loaded in this priority order (highest to lowest):
 
-1. Local `.env` file (project directory)
-2. User configuration `~/.pinit/.env`
-3. System environment variables
+1. System environment variables
+2. Local `.env` file (current directory)
+3. User configuration `~/.pinit/config`
 
 ### AI Model Configuration
 
