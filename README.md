@@ -2,11 +2,11 @@
 
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.2-blue.svg)](https://github.com/kevinmcmahon/smartpin/releases)
+[![Version](https://img.shields.io/badge/version-0.2.3-blue.svg)](https://github.com/kevinmcmahon/smartpin/releases)
 
 > AI-powered Pinboard bookmark manager that automatically extracts metadata from web pages
 
-**smartpin** installs the CLI tool `pinit`, which intelligently analyzes web pages and creates perfectly organized bookmarks for your Pinboard account. Just provide a URL, and AI will extract the title, generate a concise description, and suggest relevant tags - no manual data entry required! 🤖✨
+**smartpin** installs the CLI tool `pinit`, which intelligently analyzes web pages and automatically generates metadata for your Pinboard bookmarks. Just provide a URL, and AI will extract the title, generate a concise description, and suggest relevant tags - no manual data entry required! 🤖✨
 
 ## ✨ Features
 
